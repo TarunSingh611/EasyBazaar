@@ -1,0 +1,93 @@
+/* pass.module.css */
+
+.passContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.passBody {
+  width: 400px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon i {
+  color: #999;
+}
+
+.shut i {
+  color: #000;
+}
+
+.input-err {
+  display: none;
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+.message {
+  display: none;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.message.error {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.message.success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.subBut {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.subBut:hover {
+  background-color: #45a049;
+}
+
+.subBut:active {
+  background-color: #3d8e41;
+}
