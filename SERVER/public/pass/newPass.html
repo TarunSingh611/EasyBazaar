@@ -1,0 +1,22 @@
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="/pass.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<body>
+  <label style="font-size: large;">Enter new password:</label>
+  <div class="input-container">
+    <input id="pass" type="password" name="newpass"/>
+    <span id="pass-toggle" class="eye-icon" onclick="togglePasswordVisibility(1)"><i class="fa fa-eye-slash"></i></span>
+  </div>
+  <p id="pass-err" class="input-err">Please use a strong password</p>
+
+  <label style="font-size: large;">Re-enter password:</label>
+  <div class="input-container">
+    <input id="ver" type="password" name="newver"/> 
+    <span id="pass-toggle2" class="eye-icon" onclick="togglePasswordVisibility(2)"><i class="fa fa-eye-slash"></i></span>
+  </div>
+  <p id="pVer-err" class="input-err">Password does not match</p>
+
+  <button type="submit" id="subBut">Change Password</button>
+</body>
+<script src='/newPass.js' ></script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/admin.css">
+
+  <title>ADMIN</title>
+</head>
+
+<body>
+  <%- include("header",{user}) %>
+  <a href="/admin">ADD PRODUCTS</a>
+  <div id="product-list">
+
+  </div>
+
+
+  <div id="message"></div>
+  <a href="/adminAdd"><DIV id="addProd">&#9997</DIV></a>
+
+<button id="loadMore">load more</button>
+
+  <script src="/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/addProduct.css">
+
+  <title>ADMIN</title>
+</head>
+
+<body>
+  <% include("header", {user: user}) %>
+
+  <div class="form-container">
+    <h1 class="title">WELCOME ADMIN</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label class="label" for="name">Name:</label>
+      <input class="input-field" type="text" id="name" name="name" required><br>
+
+      <label class="label" for="desc">Description:</label>
+      <textarea class="input-field" id="desc" name="desc" required></textarea><br>
+
+      <label class="label" for="price">Price:</label>
+      <input class="input-field" type="text" id="price" name="price" required pattern="\d+(\.\d{1,2})?" title="Please enter a valid decimal number (up to 2 decimal places)">
+      <div class="error" id="price-error"></div><br>
+
+      <label class="label" for="cat">Category:</label>
+      <input class="input-field" type="text" id="cat" name="cat" required><br>
+
+      <label class="label" for="stock">Stock:</label>
+      <input class="input-field" type="number" id="stock" name="stock" required>
+      <div class="error" id="stock-error"></div><br>
+
+      <label class="label" for="pfp">Product Image:</label>
+      <input class="file-field" type="file" id="pfp" name="pfp">
+      <div class="error" id="image-error"></div><br>
+
+      <button class="submit-button" type="submit">ADD PRODUCT</button>
+    </form>
+  </div>
+  <a href="/admin"><div id="addProd">&#8634</div></a>
+  <div class="message" id="message"></div>
+
+  <script src="/addProduct.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <LINK rel="stylesheet" href="/signup.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <TITLE>Sign Up</TITLE>
+</HEAD>
+
+<BODY>
+
+    <h1>SIGN UP</h1>
+    <form method="POST" action="/signup" class="form" id="form1">
+
+
+        <input name="username" type="text" placeholder="User" autocomplete="off" class="input" id="Username" />
+        <p id="username-err" class="input-err">Please enter a valid Username</p>
+        <input name="email" type="email" autocomplete="off" placeholder="Email" class="input" id="email" />
+        <p id="email-err" class="input-err">You have entered an invalid E-mail</p>
+        <input name="pass" type="password" placeholder="Password" autocomplete="off" class="input" id="pass" />
+        <span id="togglePassword1" class="toggle-password" onclick="togglePasswordVisibility('pass', 'togglePassword1')"><i class="fa fa-eye-slash"></i></span>
+        <p id="pass-err" class="input-err">Please use a strong password</p>
+        <input name="pVer" type="password" placeholder="Re-Enter Password" autocomplete="off" class="input" id="pVer" />
+        <span id="togglePassword2" class="toggle-password" onclick="togglePasswordVisibility('pVer', 'togglePassword2')"><i class="fa fa-eye-slash"></i></span>
+        <p id="pVer-err" class="input-err">Password does not match</p>
+        <input type="submit" value="SignUp" class="btn" id="signUpSub" />
+        
+
+
+
+
+    </form>
+
+    <a href="/login"><input type="submit" value="login" class="btn" id="signUpSub" /></a>
+
+    <div id="message"></div>
+</BODY>
+<script src="/signup.js">
+</script>
+
+</HTML>

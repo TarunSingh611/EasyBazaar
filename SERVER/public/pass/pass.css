@@ -1,0 +1,106 @@
+/* Set font properties for the entire page */
+html, body {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: #333;
+}
+
+/* Center the content horizontally and vertically */
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+/* Style the "Change Password" heading */
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Style the password input field */
+input {
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 5px 1px #ccc;
+ padding-right: 30px;
+  width: 300px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+
+
+input:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 1px #4CAF50;
+}
+
+/* Style the "Change Password" button */
+button[type="submit"] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  margin:10px;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Hide the script source */
+script[src='/change.js'] {
+  display: none;
+}
+
+#message {
+  display: none;
+  font-size: larger;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  top:10%;
+  align-items: center;
+}
+.input-err {
+  display:none;
+  color: red;
+  font-size: 100%;
+  letter-spacing: 0.5px;
+
+}
+label{margin-top: 20px;}
+
+
+
+
+
+
+.input-container {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Add your additional CSS styles here */

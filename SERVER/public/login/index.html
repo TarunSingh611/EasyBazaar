@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <LINK rel="stylesheet" href="/login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <TITLE>LOGIN</TITLE>
+</HEAD>
+
+<h1>LOG IN</h1>
+<form id="form">
+
+    <input name="email" type="email" placeholder="Email" class="input" id="UserEM" />
+    <input name="pass" type="password" placeholder="Password" autocomplete="off" class="input" id="PassChk" />
+    <span id="togglePassword1" class="toggle-password" onclick="togglePasswordVisibility('PassChk', 'togglePassword1')"><i class="fa fa-eye-slash"></i></span>
+
+    <br>
+    <a href="/ForgotPass" class="link">Forgot your password?</a>
+       
+</form>
+
+<button type="submit" value="Login" class="btn" id="Sub">Log In</button>
+<span id="new_user"><a href="/signup"><input type="submit" value="Signup" class="btn" id="signInSub" /></a>
+<a href="/"><input type="submit" value="Continue as Guest" class="btn"  /></a></span>
+<div id="message"></div>
+</BODY>
+<script src="/login.js">
+</script>
+
+</HTML>

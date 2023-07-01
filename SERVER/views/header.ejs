@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/header.css"/>
+<div class="head">
+  <div id="u-name" class="name-container">
+  <a href="/">  <h1><%= user.username %></h1></a>
+  </div>
+  
+  <div class="cart-container">
+    <h1 style="margin-right:20px;"><a href="/cart">&#128722</a></h1>
+  </div>
+  <div class="settings-container">
+    <h1 class="settings">SETTINGS</h1>
+    <div class="settings-dropdown">
+      <% if (user.username == "Guest User") { %>
+        <a href='/login'>Log In</a>
+      <% } else { %>
+        <a href='/logout'>Log Out</a>
+        <% if (user.isAdmin) { %>
+        <div class="admin" onclick='admin()'>admin Only</div>
+        <% }%>
+      <a href='/changePass'>Change Password</a>
+      <% } %>
+      <a href='/forgotPass'>Forgot Password</a>
+      
+    </div>
+  </div>
+  <script src="/header.js"></script>
+</div>
