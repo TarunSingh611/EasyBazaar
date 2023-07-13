@@ -1,51 +1,72 @@
-import style from './ProductPage.module.css';
-import load from '../../api/getHomeProduct';
-import { useEffect, useState } from 'react';
-import appendProd from '../../component/ProdHome';
-
+import style from "./ProductPage.module.css";
+import load from "../../api/getHomeProduct";
+import { useEffect, useState } from "react";
+import AppendProd from "../../component/ProdHome";
+import getProd from "../../api/getProdDet";
+import GenPop from "../../component/GenPop";
 
 const ProductPage = () => {
-  const [products,setProducts]= useState([])
+  const [products, setProducts] = useState([]);
+
+  const [pop, setPop] = useState(false);
   function loadMore() {
     load(products.length)
-      .then(result => {
-   
+      .then((result) => {
         setProducts([...products, ...result]);
-       
       })
-      .catch(error => {
-        console.error('An error occurred:', error);
+      .catch((error) => {
+        console.error("An error occurred:", error);
       });
   }
-  
-useEffect(()=>{
-   
-  load(products.length)
-  .then(result => {
-    
-    setProducts([...products, ...result]);
-   
-  })
-  .catch(error => {
-    console.error('An error occurred:', error);
-  });
-   // eslint-disable-next-line
-  },[])
+
+  useEffect(() => {
+    load(products.length)
+      .then((result) => {
+        setProducts([...products, ...result]);
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+    // eslint-disable-next-line
+  }, []);
+
+  const showDetails = async (item) => {
+    try {
+      const prod = await getProd(item.id);
+      setPop(prod);
+    } catch (error) {
+      // Handle any errors that occurred during the request
+      console.error(error);
+    }
+  };
+  // genPop function
+
+  function funPop() {
+    setPop(false);
+  }
 
   return (
     <div className={style.homeBody}>
       <div className={style.productList}>
-      {products.map((item)=>{
-        return appendProd(item);
-      })}
-
+        {products.map((item) => {
+          return (
+            <AppendProd item={item} key={item.id} showDetails={showDetails} />
+          );
+        })}
       </div>
-      <div className={style.hid} id="pop"></div>
-      <div id="message"></div>
-      <button onClick={()=>{loadMore()}}>load more</button>
+
+      {pop ? <GenPop item={pop} funPop={funPop} /> : null}
+
+      <button
+        className={style.loadMore}
+        onClick={() => {
+          loadMore();
+        }}
+      >
+        load more
+      </button>
     </div>
   );
 };
-
 
 export default ProductPage;

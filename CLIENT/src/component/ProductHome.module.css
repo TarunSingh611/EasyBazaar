@@ -74,45 +74,6 @@ h3 {
   margin-bottom: 10px;
 }
 
-/* The "popDet" class should be hidden by default */
-.hid {
-  position: none;
-  display: none;
-  height: 100%;
-  width: 100%;
-  background-color: #333;
-  opacity: 0.5;
-}
-
-.show {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(51, 51, 51, 0.5);
-}
-
-.popImg {
-  height: 40%;
-  width: 40%;
-  margin: auto;
-}
-
-.hidContainer {
-  margin: auto;
-  padding: 3%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  text-align: center;
-  background-color: #fff;
-  width: 40%;
-  max-width: 300px;
-  top: 40%;
-}
 
 .close {
   width: 100%;
@@ -120,7 +81,7 @@ h3 {
 }
 
 .message {
-  display: none;
+
   background-color: #4caf50;
   color: white;
   padding: 10px;
@@ -133,10 +94,12 @@ h3 {
 .quantityDiv {
   display: flex;
   justify-content: space-between;
+
 }
 
 .quantity {
-  width: 50px;
+  width: 30px;
+  margin: auto;
 }
 
 .buttonDiv {
@@ -148,27 +111,20 @@ h3 {
 .doneBtn {
   width: 50%;
   margin: 0;
+  background-color: #4caf50;
+  margin:2px;
 }
 
 .cancelBtn {
   width: 50%;
   margin: 0;
+  margin:2px;
+  background-color: grey;
 }
 
-.conDiv {
-  display: none;
-}
 
-.goToCartBtn {
-  display: none;
-  background-color: #ddd;
-  color: #333;
-  border: none;
-  margin: 2px 2px 2px 0px;
-  padding: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
+
 
 /* Responsive styling for cards on smaller screens */
 @media (min-width: 601px) and (max-width: 1000px) {

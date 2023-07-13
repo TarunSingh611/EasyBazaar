@@ -1,60 +1,74 @@
-
-import style from './pass.module.css';
-// import { useNavigate } from 'react-router-dom';
-
-
+import { useState } from "react";
+import style from "./pass.module.css";
 
 function ForgotPass() {
-  // const navigate =useNavigate();
+  const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-function handleVerifyEmail() {
-  const inp = document.getElementById("subIn");
-  const url = "http://localhost:3000/forgotPass";
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", url);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  const data = { email: inp.value };
-  xhr.send(JSON.stringify(data));
-  xhr.addEventListener("load", function () {
-    if (xhr.status === 200) {
-      if (xhr.response === '0') {
-        let message = document.getElementById("message");
-
-        message.innerText = 'Account does not exist';
-        message.style.display = "block";
-        message.style.background = '#ff0000';
-        // Hide the message element after 2 seconds
+  function handleVerifyEmail() {
+    const url = "http://localhost:3000/forgotPass";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+      credentials: "include",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data === "0") {
+          setErrorMessage("Account does not exist");
+        } else if (data === "1") {
+          setErrorMessage("Check Email for the Link to change Password");
+        }
         setTimeout(() => {
-          message.style.display = "none";
-        }, 1600);
-      } else if (xhr.response === '1') {
-        let message = document.getElementById("message");
+          setErrorMessage("");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Error verifying email:", error);
+      });
+  }
 
-        message.innerText = 'Check Email for the Link to change Password';
-        message.style.display = "block";
-        message.style.background = '#4CAF50';
-        // Hide the message element after 2 seconds
-        setTimeout(() => {
-          message.style.display = "none";
-        }, 1600);
-      }
-    }
-  });
-}
+  return (
+    <div className={style.passContainer}>
+      <div className="passBody">
+        <label className="label">Change Password: Enter Email</label>
+        <br />
+        <div className={`${style.inputContainer}`}>
+          <input
+            type="email"
+            className={style.subIn}
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+        <button
+          type="submit"
+          className={style.subBut}
+          onClick={handleVerifyEmail}
+        >
+          Verify Email
+        </button>
 
-
-  return (<div className={style.passContainer}>
-    <div className='passBody'>
-    <label className="label">Change Password: Enter Email</label>
-<br/>
-      <input type="email" className={style.subIn} name="email" />
-
-      <button type="submit" className={style.subBut} onClick={handleVerifyEmail}>
-        Verify Email
-      </button>
-
-      <div id="message" className={style.message}></div>
-    </div></div>
+        {errorMessage && (
+          <div
+            id="message"
+            className={style.message}
+            style={{
+              background: errorMessage.includes("Check")
+                ? "#4CAF50"
+                : "#ff0000",
+            }}
+          >
+            {errorMessage}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

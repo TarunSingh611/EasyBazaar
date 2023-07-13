@@ -1,0 +1,82 @@
+/* cart.module.css */
+.productCard {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width:29%
+}
+
+.productImage {
+  flex: 0 0 100px;
+  margin-right: 20px;
+}
+
+.productImage img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.productDetails {
+  flex-grow: 3;
+}
+
+.productName {
+  margin-bottom: 10px;
+}
+
+.productName h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.productName h3:last-child {
+  font-size: 16px;
+  font-weight: normal;
+  color: #888;
+}
+
+.productName h6 {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.spanBut {
+  display: flex;
+  align-items: center;
+}
+
+.sInc,
+.sDec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #eee;
+  color: #888;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.showDetailsBtn {
+  border: none;
+  background-color: #ccc;
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.showDetailsBtn:hover {
+  background-color: #aaa;
+}

@@ -1,26 +1,26 @@
 function load(loaded) {
-  const url = 'http://localhost:3000/loadMore';
+  const url = "http://localhost:3000/loadMore";
 
   return new Promise((resolve, reject) => {
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ loaded })
+      body: JSON.stringify({ loaded }),
+      credentials: "include",
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Load request failed');
+          throw new Error("Load request failed");
         }
         return response.json();
       })
-      .then(data => {
-        
+      .then((data) => {
         const result = data.products;
         resolve(result);
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error);
       });
   });

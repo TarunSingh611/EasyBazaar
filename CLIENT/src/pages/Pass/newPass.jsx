@@ -1,140 +1,175 @@
-import{ useState } from 'react';
-import style from './pass.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import style from "./pass.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function NewPass() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
-  const [pass, setPass] = useState('');
-  const [ver, setVer] = useState('');
+  const [pass, setPass] = useState("");
+  const [ver, setVer] = useState("");
   const [passErrVisible, setPassErrVisible] = useState(false);
   const [pVErrVisible, setPVErrVisible] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [verVisibility, setVerVisibility] = useState(false);
 
   const handlePassChange = (e) => {
     const currentValue = e.target.value;
-    const pattern = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
+
+    const pattern =
+      /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
     const valid = pattern.test(currentValue);
+
     setPass(currentValue);
-    setPassErrVisible(!valid && currentValue !== '');
+
+    setPassErrVisible(!valid && currentValue !== "");
   };
+
+  const getnewPass = async () => {
+    const url = "http://localhost:3000/newPass";
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        credentials: "include",
+      });
+
+      if (response) {
+        const res = await response.json();
+        const result = res.res;
+
+        if (result === 1) {
+          navigate("/");
+        }
+      } else {
+        throw new Error("new Pass failed");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+  getnewPass();
 
   const handleVerChange = (e) => {
     const currentValue = e.target.value;
+
     const passMatch = pass === currentValue;
+
     setVer(currentValue);
-    setPVErrVisible(!passMatch && currentValue !== '');
+    setPVErrVisible(!passMatch && currentValue !== "");
   };
 
   const handleSubmit = () => {
-    let ver = 1;
+    let verchk = 1;
 
-    if (!(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(pass))) {
-      ver = 0;
+    if (
+      !/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(
+        pass
+      )
+    ) {
+      verchk = 0;
       setPassErrVisible(true);
-      setPass('');
+      setPass("");
     }
 
     if (pass !== ver) {
-      ver = 0;
+      verchk = 0;
       setPVErrVisible(true);
-      setVer('');
+      setVer("");
     }
 
-    if (ver === 1) {
-      const xhr = new XMLHttpRequest();
-      const url="http://localhost:3000/newpass";
-      xhr.open('POST', url);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      const data = { newpass: pass };
-      xhr.send(JSON.stringify(data));
-      xhr.addEventListener('load', () => {
-        if (xhr.status === 200) {
-          navigate("/");
-        }
-      });
+    if (verchk === 1) {
+      const url = "http://localhost:3000/newPass";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newpass: pass }),
+        credentials: "include",
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200) {
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.error("Error changing password:", error);
+        });
     }
   };
 
   const togglePasswordVisibility = (inputType) => {
     if (inputType === 1) {
-      const passToggle = document.getElementById('pass-toggle');
-      const passInput = document.getElementById('pass');
-      if (passInput.type === 'password') {
-        passInput.type = 'text';
-        passToggle.classList.add(style.shut);
-      } else {
-        passInput.type = 'password';
-        passToggle.classList.remove(style.shut);
-      }
+      setShowPassword((prevShowPassword) => !prevShowPassword);
     } else {
-      const verToggle = document.getElementById('ver-toggle');
-      const verInput = document.getElementById('ver');
-      if (verInput.type === 'password') {
-        verInput.type = 'text';
-        verToggle.classList.add(style.shut);
-      } else {
-        verInput.type = 'password';
-        verToggle.classList.remove(style.shut);
-      }
+      setVerVisibility((prevVerVisibility) => !prevVerVisibility);
     }
   };
 
   return (
     <div className={style.passContainer}>
-    <div className='passBody'>
-    <label className="label">Enter new password:</label>
+      <div className="passBody">
+        <label className="label">Enter new password:</label>
 
-      <div className={`${style.inputContainer}`}>
-        <input
-          type="password"
-          className={`${style.pass}`}
-          id="pass"
-          name="newpass"
-          value={pass}
-          onChange={handlePassChange}
-        />
-        <span
-          className={`${style.eyeIcon}`}
-          id="pass-toggle"
-          onClick={() => togglePasswordVisibility(1)}
+        <div className={`${style.inputContainer}`}>
+          <input
+            type={showPassword ? "text" : "password"}
+            className={`${style.pass}`}
+            id="pass"
+            name="newpass"
+            value={pass}
+            onChange={handlePassChange}
+          />
+          <span
+            className={`${style.togglePassword} ${style.togglePassword1}`}
+            onClick={() => togglePasswordVisibility(1)}
+          >
+            <FontAwesomeIcon icon={faEyeSlash} />
+          </span>
+        </div>
+        {passErrVisible && (
+          <p className={`${style.inputErr}`} id="pass-err">
+            Please use a strong password
+          </p>
+        )}
+
+        <label className="label">Re-enter password:</label>
+        <div className={`${style.inputContainer}`}>
+          <input
+            type={verVisibility ? "text" : "password"}
+            className={`${style.ver}`}
+            id="ver"
+            name="newver"
+            value={ver}
+            onChange={handleVerChange}
+          />
+          <span
+            className={`${style.togglePassword} ${style.togglePassword1}`}
+            onClick={() => togglePasswordVisibility(2)}
+          >
+            <FontAwesomeIcon icon={faEyeSlash} />
+          </span>
+        </div>
+        {pVErrVisible && (
+          <p className={`${style.inputErr}`} id="pVer-err">
+            Password does not match
+          </p>
+        )}
+
+        <button
+          type="submit"
+          className={`${style.subBut}`}
+          onClick={handleSubmit}
         >
-          <i className="fa fa-eye-slash"></i>
-        </span>
+          Change Password
+        </button>
       </div>
-      <p className={`${style.inputErr}`} id="pass-err" style={{ display: passErrVisible ? 'block' : 'none' }}>
-        Please use a strong password
-      </p>
-
-      <label className="label">Re-enter password:</label>
-      <div className={`${style.inputContainer}`}>
-        <input
-          type="password"
-          className={`${style.ver}`}
-          id="ver"
-          name="newver"
-          value={ver}
-          onChange={handleVerChange}
-        />
-        <span
-          className={`${style.eyeIcon}`}
-          id="ver-toggle"
-          onClick={() => togglePasswordVisibility(2)}
-        >
-          <i className="fa fa-eye-slash"></i>
-        </span>
-      </div>
-      <p className={`${style.inputErr}`} id="pVer-err" style={{ display: pVErrVisible ? 'block' : 'none' }}>
-        Password does not match
-      </p>
-
-      <button
-        type="submit"
-        className={`${style.subBut}`}
-        onClick={handleSubmit}
-      >
-        Change Password
-      </button>
-    </div>
     </div>
   );
 }

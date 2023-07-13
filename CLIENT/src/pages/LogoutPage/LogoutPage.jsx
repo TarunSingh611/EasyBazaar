@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LogoutPage() {
   const navigate = useNavigate();
@@ -8,20 +8,21 @@ function LogoutPage() {
 
   useEffect(() => {
     fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json; charset=utf-8'
+        "Content-Type": "application/json; charset=utf-8",
       },
+      credentials: "include",
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Logout request failed');
+          throw new Error("Logout request failed");
         }
         // Redirect the user after successful logout
         navigate("/");
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       })
       .finally(() => {
         setIsLoading(false); // Set isLoading to false when the logout process is complete

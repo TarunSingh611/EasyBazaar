@@ -1,5 +1,5 @@
-const postSignUp = (data) => {
-  const url = "http://localhost:3000/signup";
+const postLogin = (data) => {
+  const url = "http://localhost:3000/login";
 
   return fetch(url, {
     method: "POST",
@@ -9,7 +9,7 @@ const postSignUp = (data) => {
     body: JSON.stringify(data),
     credentials: "include",
   })
-    .then((response) => response.json())
+    .then((response) => response.text())
     .then((data) => {
       return data;
     })
@@ -18,23 +18,25 @@ const postSignUp = (data) => {
     });
 };
 
-const getSignup = async () => {
-  const url = "http://localhost:3000/signup";
+const getLogin = async () => {
+  const url = "http://localhost:3000/login";
   try {
     const response = await fetch(url, {
       method: "GET",
-
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
       credentials: "include",
     });
 
     if (response) {
       return await response.text();
     } else {
-      throw new Error("signup request failed");
+      throw new Error("Login request failed");
     }
   } catch (error) {
     console.error("An error occurred:", error);
   }
 };
 
-export { getSignup, postSignUp };
+export { getLogin, postLogin };

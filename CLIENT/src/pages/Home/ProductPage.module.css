@@ -70,109 +70,19 @@ h3{margin-top: 0;}
   height:auto;
 }
 
-#loadMore{
+.loadMore{
   display: block;
   text-align: center;
+font-size: large;
   margin: 0 auto;
   align-self: center;
   margin-bottom: 10px;
+  width:100%;
+  text-align: center;
 
 }
 
 
-
-
-/* The "popDet" class should be hidden by default */
-
-.hid {
-position: none;
-display: none;
-height:100%;
-width:100%;
-background-color: #333;
-opacity: 0.5;
-}
-
-.show{
-display:block;
-position: fixed;
-top:0;
-left:0;
-height:100%;
-width:100%;
-background-color: rgba(51, 51, 51, 0.5);
-}
-.popImg{
-height:40%;
-width:40%;
-margin: auto;
-
-}
-
-.hidContainer{
-margin:auto;
-padding:3%;
-display: flex;
-flex-direction: column;
-margin-top: 10%;
-margin-bottom: 10%;
-text-align: center;
-background-color: #fff;
-width: 40%;
-max-width:300px;
-top:40%
-}
-
-
-.close{width:100%;
-height:100%;}
-
-#message {
-display: none;
-background-color: #4CAF50;
-color: white;
-padding: 10px;
-position: fixed;
-bottom:30px;
-right: 0;
-transform: translateX(-50%);
-}
-
-.qdiv{
-display: flex;
-justify-content: space-between;
-}
-
-.no{
-width:50px;
-}
-
-.butdiv{
-display: flex;
-width: 100%;
-padding: 0;
-}
-.done{width:50%;margin:0}
-.canc{width:50%;margin:0}
-
-.condiv{
-display: none;
-}
-
-.gocart{
-display:none;
-background-color: #ddd;
-color: #333;
-border: none;
-margin:2px 2px 2px 0px;  
-padding: 5px;
-border-radius: 5px;
-cursor: pointer;
-}
-
-
-
-/* Responsive styling for cards on smaller screens */
 
 @media (min-width: 601px) and (max-width: 1000px) {
 .product-card {

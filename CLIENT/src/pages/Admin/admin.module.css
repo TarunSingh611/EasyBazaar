@@ -1,4 +1,6 @@
-#productList {
+/* ProductList.css */
+
+.productList {
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +20,6 @@
   box-sizing: border-box; /* Include padding and border in the card's width */
 }
 
-
 .productImage {
   height: 200px; /* Set the desired fixed height for the product image */
   display: flex;
@@ -30,7 +31,6 @@
   max-height: 100%;
   max-width: 100%;
 }
-
 
 .productDetails {
   margin-top: 10px;
@@ -61,35 +61,23 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-button {
-  width:50%;
-  padding: 8px 12px;
+.buttonCon {
+  width: 100%;
   margin-top: 10px;
   border: none;
-  border-radius: 3px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #0069d9;
+.buttonApply {
+  width: 100%;
 }
 
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.button {
-  display: flex;
-  justify-content: space-between;
-  margin-top: auto; /* Push the button group to the bottom */
+.buttonDelete {
+  width: 100%;
 }
 
 .loadMore {
   background-color: #C5C5C5;
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px; /* Add some top margin for spacing */
@@ -103,7 +91,7 @@ button:focus {
   width: 60px;
   height: 60px;
   line-height: 60px;
-  text-align: center;
+padding: 0;
   position: fixed;
   bottom: 35px;
   right: 35px;
@@ -131,29 +119,27 @@ button:focus {
   text-align: center;
 }
 
-
-
 /* Responsive styling for cards on smaller screens */
 @media (max-width: 400px) {
-  .product-card {
+  .productCard {
     width: 100%;
   }
 }
 
 @media (min-width: 401px) and (max-width: 800px) {
-  .product-card {
+  .productCard {
     width: calc(50% - 20px);
   }
 }
 
 @media (min-width: 801px) and (max-width: 1200px) {
-  .product-card {
+  .productCard {
     width: calc(33.33% - 20px);
   }
 }
 
 @media (min-width: 1201px) {
-  .product-card {
+  .productCard {
     width: calc(25% - 20px);
   }
 }

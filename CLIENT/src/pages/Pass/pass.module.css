@@ -18,15 +18,16 @@
 .label {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom:100px;
 }
 
-.input-container {
+.inputContainer {
   position: relative;
   margin-bottom: 15px;
+  margin-top:10px;
 }
 
-.input-container input {
+.inputContainer input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -34,30 +35,39 @@
   box-sizing: border-box;
 }
 
-.eye-icon {
+
+.togglePassword {
+  display: block;
+
+  margin-left: auto;
+  margin-right: 0;
+  width: 10px;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 0.75rem; /* Adjust the position of the icon */
   transform: translateY(-50%);
   cursor: pointer;
 }
 
-.eye-icon i {
-  color: #999;
+
+
+.togglePassword svg {
+  width: 1rem;
+  height: 1rem;
+  fill: #ccc;
 }
 
-.shut i {
-  color: #000;
-}
 
-.input-err {
-  display: none;
+
+
+.inputErr {
+
   color: #ff0000;
   margin-top: 5px;
 }
 
 .message {
-  display: none;
+  
   padding: 10px;
   border-radius: 4px;
   margin-top: 10px;
@@ -82,6 +92,9 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width:100%;
+  left:0;
+  margin: 0;
 }
 
 .subBut:hover {
@@ -91,3 +104,13 @@
 .subBut:active {
   background-color: #3d8e41;
 }
+
+.inputContainer {
+  position: relative;
+}
+
+.inputContainer input {
+  padding-right: 2.5rem; /* Add padding to accommodate the icon */
+}
+
+

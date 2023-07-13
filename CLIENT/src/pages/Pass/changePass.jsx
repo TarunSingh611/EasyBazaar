@@ -1,68 +1,83 @@
-
-import style from './pass.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import style from "./pass.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { getChangePass, postChangePass } from "../../api/apiChangePass";
 
 function ChangePass() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  getChangePass()
+    .then((result) => {
+      if (result === 1) {
+        navigate("/");
+      }
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
 
   const handleVerifyPassword = () => {
-    const inp = document.getElementById("subIn");
-    const url = "http://localhost:3000/changePass";
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    const data = { currpass: inp.value };
-    xhr.send(JSON.stringify(data));
-    xhr.addEventListener("load", function () {
-      if (xhr.status === 200) {
-        if (xhr.responseText === '1') {
+    postChangePass(password)
+      .then((data) => {
+        if (data === "1") {
           navigate("/newPass");
         } else {
-          let message = document.getElementById("message");
-
-          message.innerText = 'Wrong password entered, Try Again';
-          message.style.display = "block";
-          message.style.background = '#ff0000';
-          // Hide the message element after 2 seconds
+          setErrorMessage("Wrong password entered, Try Again");
           setTimeout(() => {
-            message.style.display = "none";
-          }, 1600);
+            setErrorMessage("");
+          }, 2000);
         }
-      }
-    });
+      })
+      .catch((error) => {
+        console.error("Error verifying password:", error);
+      });
   };
 
   const togglePasswordVisibility = () => {
-    const passToggle = document.getElementById("pass-toggle");
-    const pass = document.getElementById("subIn");
-
-    if (pass.type === "password") {
-      pass.type = "text";
-      passToggle.classList.add(style.shut);
-    } else {
-      pass.type = "password";
-      passToggle.classList.remove(style.shut);
-    }
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  return (<div className={style.passContainer}>
-    <div className='passBody'>
-      <label className="label">Change Password: Enter current Password</label>
+  return (
+    <div className={style.passContainer}>
+      <div className="passBody">
+        <label className="label">Change Password: Enter current Password</label>
 
-      <div className={`${style.inputContainer}`}>
-        <input type="password" id="subIn" name="currpass" />
-        <span className={`${style.eyeIcon}`} id="pass-toggle" onClick={togglePasswordVisibility}>
-          <i className="fa fa-eye-slash"></i>
-        </span>
+        <div className={`${style.inputContainer}`}>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="subIn"
+            name="currpass"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <span
+            className={`${style.togglePassword}`}
+            onClick={togglePasswordVisibility}
+          >
+            <FontAwesomeIcon icon={faEyeSlash} />
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          className={`${style.subBut}`}
+          onClick={handleVerifyPassword}
+        >
+          Verify Password
+        </button>
+
+        {errorMessage && (
+          <div id="message" style={{ background: "#ff0000" }}>
+            {errorMessage}
+          </div>
+        )}
       </div>
-
-      <button type="submit" className={`${style.subBut}`} onClick={handleVerifyPassword}>
-        Verify Password
-      </button>
-
-      <div id="message"></div>
-    </div></div>
+    </div>
   );
 }
-
 export default ChangePass;

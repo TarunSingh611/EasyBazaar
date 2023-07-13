@@ -1,49 +1,43 @@
-import { useEffect, useState } from 'react';
-import Header from '../../component/Header';
-import PropTypes from 'prop-types';
-import style from './cart.module.css';
-import Cartitems from './cartItem';
+import { useState, useEffect } from "react";
+import Header from "../../component/Header";
+import PropTypes from "prop-types";
+import style from "./cart.module.css";
+import apiGetCart from "../../api/apiGetCart";
+import { useNavigate } from "react-router-dom";
+import Cartitems from "./cartItem";
 
 const CartPage = () => {
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
 
-  const [data, setData] = useState(null);
+  async function getCartUser() {
+    try {
+      const apiRes = await apiGetCart();
+
+      if (apiRes.res === 1) {
+        navigate("/login");
+      } else if (apiRes.res === 0) {
+        console.log("NOT verified");
+      } else {
+        let data = apiRes.res;
+        setData(data);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  }
 
   useEffect(() => {
-    const url = "http://127.0.0.1:3000/cart";
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-    })
-      .then(response => {
-        if (response.ok) {
-          
-          return response.json();
-        } else {
-          throw new Error('cart load failed');
-        }
-      })
-      .then(data => {
-        
-        setData(data);
-      })
-      .catch(error => {
-        console.error('An error occurred:', error);
-      });
+    getCartUser();
+    //  eslint-disable-next-line
   }, []);
-
-
-
-
 
   return (
     <div>
-       {data && <Header user={data.user} />}
+      {data && <Header user={data} />}
 
       <div className={style.cartCon}>
-
-      { <Cartitems/> }
+        {<Cartitems />}
         <div className={`${style.hid} ${style.pop}`}>
           {/* Content within the pop div */}
         </div>
@@ -59,8 +53,8 @@ const CartPage = () => {
 CartPage.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string,
-    isAdmin: PropTypes.bool
-  })
+    isAdmin: PropTypes.bool,
+  }),
 };
 
 export default CartPage;

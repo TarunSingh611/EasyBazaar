@@ -1,10 +1,11 @@
 .container {
   max-width: 400px;
-  margin: 5% auto 0;
+  margin: 15% auto 10% auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8f8f8;
+ 
 }
 
 .title {
@@ -66,9 +67,10 @@
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  line-height: 60px;
+  line-height: 150%;
   text-align: center;
   position: fixed;
+  padding: 0;
   bottom: 35px;
   right: 35px;
   cursor: pointer;

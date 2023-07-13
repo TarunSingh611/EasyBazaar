@@ -1,0 +1,29 @@
+/* Message.module.css */
+
+.message {
+  position: fixed;
+  padding: 10px;
+  margin-bottom: auto;
+  top: 10%;
+  border-radius: 5px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Default styling */
+.message-default {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* Success styling */
+.message-success {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+/* Error styling */
+.message-error {
+  background-color: #f2dede;
+  color: #a94442;
+}
