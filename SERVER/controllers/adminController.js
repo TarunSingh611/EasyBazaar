@@ -4,15 +4,15 @@ const adAuth = require("../my_modules/adminAuth");
 
 const adminController = {
   getAdmin: [
-    adAuth, 
+    adAuth,
     (req, res) => {
       let user = req.session.user;
-      res.send({ user });
-    }
+      res.send({ res: user });
+    },
   ],
 
   postAdmin: [
-    adAuth, 
+    adAuth,
     (req, res) => {
       let data = req.body;
 
@@ -34,8 +34,8 @@ const adminController = {
       db.sqlwrite(code, function () {
         res.send();
       });
-    }
-  ]
+    },
+  ],
 };
 
 module.exports = adminController;
